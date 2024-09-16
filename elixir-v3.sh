@@ -94,7 +94,7 @@ IP_ADDRESS=$(curl -s ifconfig.me)
 echo "STRATEGY_EXECUTOR_IP_ADDRESS=$IP_ADDRESS" >> $ENV_FILE
 echo ""
 
-read -p "검증자의 표시 이름을 입력하세요 : " DISPLAY_NAME
+read -p "검증자 이름을 입력하세요 : " DISPLAY_NAME
 echo "STRATEGY_EXECUTOR_DISPLAY_NAME=$DISPLAY_NAME" >> $ENV_FILE
 
 read -p "검증자 보상을 받을 지갑 주소를 입력하세요: " BENEFICIARY
