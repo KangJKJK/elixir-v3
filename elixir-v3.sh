@@ -109,7 +109,7 @@ echo -e "${BOLD}${CYAN}${ENV_FILE} 파일이 다음 내용으로 생성되었습
 cat $ENV_FILE
 echo ""
 
-echo -e "${BOLD}${YELLOW}1.방문하세요: https://testnet-3.elixir.xyz/${NC}"
+echo -e "${BOLD}${YELLOW}1. 해당 주소로 이동하세요: https://testnet-3.elixir.xyz/${NC}"
 echo -e "${BOLD}${YELLOW}2. Sepolia Ethereum이 있는 지갑을 연결하세요 (이 지갑은 검증자 지갑 주소가 아니어야 합니다).${NC}"
 echo -e "${BOLD}${YELLOW}3. Sepolia에서 MOCK Elixir 토큰을 발행하세요${NC}"
 echo -e "${BOLD}${YELLOW}4. MOCK 토큰을 스테이킹하세요${NC}"
