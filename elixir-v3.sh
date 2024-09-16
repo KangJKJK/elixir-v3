@@ -97,7 +97,7 @@ echo ""
 read -p "검증자 이름을 입력하세요 : " DISPLAY_NAME
 echo "STRATEGY_EXECUTOR_DISPLAY_NAME=$DISPLAY_NAME" >> $ENV_FILE
 
-read -p "검증자 보상을 받을 지갑 주소를 입력하세요: " BENEFICIARY
+read -p "검증자 보상을 받을 EVM지갑 주소를 입력하세요: " BENEFICIARY
 echo "STRATEGY_EXECUTOR_BENEFICIARY=$BENEFICIARY" >> $ENV_FILE
 echo ""
 PRIVATE_KEY=$(grep "Private Key:" validator_wallet.txt | awk -F': ' '{print $2}' | sed 's/^0x//')
