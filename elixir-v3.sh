@@ -125,6 +125,14 @@ else
     exit 1
 fi
 
+# 5. UFW 설치 및 포트 개방
+execute_with_prompt "UFW 설치 중..." "sudo apt-get install -y ufw"
+execute_with_prompt "필요한 포트 개방 중..." \
+    "sudo ufw enable && \
+    sudo ufw allow ssh && \
+    sudo ufw allow 17690/tcp && \
+    sudo ufw status"
+    
 echo ""
 echo -e "${BOLD}${CYAN}Docker 실행 중...${NC}"
 docker run -d --env-file validator.env --name elixir -p 17690:17690 --restart unless-stopped elixirprotocol/validator:v3
