@@ -19,9 +19,10 @@ echo ""
 apt install npm -y
 echo -e "${YELLOW}NVM을 설치하는 중입니다...${NC}"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # NVM 로드
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # NVM bash_completion 로드
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 if command_exists node; then
     echo -e "${GREEN}Node.js가 이미 설치되어 있습니다: $(node -v)${NC}"
