@@ -16,7 +16,7 @@ command_exists() {
 
 echo ""
 
-apt install npm
+apt install npm -y
 
 if command_exists nvm; then
     echo -e "${GREEN}NVM이 이미 설치되어 있습니다.${NC}"
