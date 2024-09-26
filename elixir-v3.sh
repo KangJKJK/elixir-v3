@@ -24,16 +24,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-if command_exists node; then
-    echo -e "${GREEN}Node.js가 이미 설치되어 있습니다: $(node -v)${NC}"
-else
-    echo -e "${YELLOW}Node.js를 설치하는 중입니다...${NC}"
-    nvm install node
-    nvm use node
-    echo -e "${GREEN}Node.js가 설치되었습니다: $(node -v)${NC}"
-fi
-
-echo ""
+nvm install --lts
+nvm use --lts
+node -v
 
 echo -e "${BOLD}${CYAN}ethers 패키지 설치 확인 중...${NC}"
 if ! npm list ethers &> /dev/null; then
