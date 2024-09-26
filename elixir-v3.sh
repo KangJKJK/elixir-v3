@@ -125,15 +125,17 @@ else
     exit 1
 fi
 
-# 5. UFW 설치 및 포트 개방
-execute_with_prompt "UFW 설치 중..." "sudo apt-get install -y ufw"
-execute_with_prompt "필요한 포트 개방 중..." \
-    "sudo ufw enable && \
-    sudo ufw allow ssh && \
-    sudo ufw allow 17690/tcp && \
-    sudo ufw status"
-    
-echo ""
+# 현재 사용 중인 포트 확인
+used_ports=$(netstat -tuln | awk '{print $4}' | grep -o '[0-9]*$' | sort -u)
+
+# 각 포트에 대해 ufw allow 실행
+for port in $used_ports; do
+    echo -e "${GREEN}포트 ${port}을(를) 허용합니다.${NC}"
+    sudo ufw allow $port
+done
+
+echo -e "${GREEN}모든 사용 중인 포트가 허용되었습니다.${NC}"
+
 echo -e "${BOLD}${CYAN}Docker 실행 중...${NC}"
 docker run -d --env-file validator.env --name elixir -p 17690:17690 --restart unless-stopped elixirprotocol/validator:v3
 echo ""
