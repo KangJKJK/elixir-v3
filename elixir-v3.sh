@@ -16,16 +16,26 @@ command_exists() {
 
 echo ""
 
-apt install npm -y
+# NVM 설치
 echo -e "${YELLOW}NVM을 설치하는 중입니다...${NC}"
+apt install npm -y
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
+# NVM 설정을 현재 세션에 적용
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# .bashrc 또는 .bash_profile에 NVM 설정 추가
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.bashrc
+
+# NVM을 사용하여 LTS Node.js 설치
 nvm install --lts
 nvm use --lts
+
+# 설치된 Node.js 버전 확인
 node -v
 
 echo -e "${BOLD}${CYAN}ethers 패키지 설치 확인 중...${NC}"
