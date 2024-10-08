@@ -60,14 +60,14 @@ fi
 
 echo -e "${BOLD}${CYAN}검증자 지갑 생성 중...${NC}"
 
-read -p "기존 지갑의 니모닉 구문을 입력하세요: " USER_INPUT
+read -p "기존 지갑의 니모닉 구문을 입력하세요: " MNEMONIC_INPUT
 
 cat << EOF > use_existing_wallet.js
 const { Wallet } = require('ethers');
 const fs = require('fs');
 
 // 니모닉 구문으로 지갑 생성
-const wallet = Wallet.fromMnemonic('$MNEMONIC_INPUT');
+const wallet = Wallet.fromMnemonic(\`${MNEMONIC_INPUT}\`);
 
 const mnemonic = wallet.mnemonic.phrase;
 const address = wallet.address;
