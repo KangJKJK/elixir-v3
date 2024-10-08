@@ -59,20 +59,25 @@ else
 fi
 
 echo -e "${BOLD}${CYAN}검증자 지갑 생성 중...${NC}"
-cat << 'EOF' > generate_wallet.js
+
+read -p "기존 지갑의 니모닉 구문을 입력하세요: " USER_INPUT
+
+cat << EOF > use_existing_wallet.js
 const { Wallet } = require('ethers');
 const fs = require('fs');
 
-const wallet = Wallet.createRandom();
+// 니모닉 구문으로 지갑 생성
+const wallet = Wallet.fromMnemonic('$MNEMONIC_INPUT');
+
 const mnemonic = wallet.mnemonic.phrase;
 const address = wallet.address;
 const privateKey = wallet.privateKey;
 
-const walletData = `
-Mnemonic: ${mnemonic}
-Address: ${address}
-Private Key: ${privateKey}
-`;
+const walletData = \`
+Mnemonic: \${mnemonic}
+Address: \${address}
+Private Key: \${privateKey}
+\`;
 
 const filePath = 'validator_wallet.txt';
 fs.writeFileSync(filePath, walletData);
@@ -81,7 +86,7 @@ console.log('');
 console.log('검증자 지갑 니모닉 구문:', mnemonic);
 console.log('검증자 지갑 주소:', address);
 console.log('검증자 지갑 개인 키:', privateKey);
-console.log('\x1B[32m지갑 자격 증명이 \x1b[35m validator_wallet.txt\x1B[0m에 저장되었습니다.');
+console.log('\\x1B[32m지갑 자격 증명이 \\x1b[35m validator_wallet.txt\\x1B[0m에 저장되었습니다.');
 EOF
 
 node generate_wallet.js
