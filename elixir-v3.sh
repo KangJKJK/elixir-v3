@@ -67,29 +67,34 @@ const { Wallet } = require('ethers');
 const fs = require('fs');
 
 // 니모닉 구문으로 지갑 생성
-const wallet = Wallet.fromMnemonic(\`${MNEMONIC_INPUT}\`);
+try {
+    const wallet = Wallet.fromMnemonic('$MNEMONIC_INPUT');
 
-const mnemonic = wallet.mnemonic.phrase;
-const address = wallet.address;
-const privateKey = wallet.privateKey;
+    const mnemonic = wallet.mnemonic.phrase;
+    const address = wallet.address;
+    const privateKey = wallet.privateKey;
 
-const walletData = \`
+    const walletData = \`
 Mnemonic: \${mnemonic}
 Address: \${address}
 Private Key: \${privateKey}
 \`;
 
-const filePath = 'validator_wallet.txt';
-fs.writeFileSync(filePath, walletData);
+    const filePath = 'validator_wallet.txt';
+    fs.writeFileSync(filePath, walletData);
 
-console.log('');
-console.log('검증자 지갑 니모닉 구문:', mnemonic);
-console.log('검증자 지갑 주소:', address);
-console.log('검증자 지갑 개인 키:', privateKey);
-console.log('\\x1B[32m지갑 자격 증명이 \\x1b[35m validator_wallet.txt\\x1B[0m에 저장되었습니다.');
+    console.log('');
+    console.log('검증자 지갑 니모닉 구문:', mnemonic);
+    console.log('검증자 지갑 주소:', address);
+    console.log('검증자 지갑 개인 키:', privateKey);
+    console.log('\\x1B[32m지갑 자격 증명이 \\x1b[35m validator_wallet.txt\\x1B[0m에 저장되었습니다.');
+} catch (error) {
+    console.error('유효하지 않은 니모닉 구문입니다. 다시 시도하세요.');
+    process.exit(1);
+}
 EOF
 
-node generate_wallet.js
+node use_existing_wallet.js
 echo ""
 
 ENV_FILE="validator.env"
