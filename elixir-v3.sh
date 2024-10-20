@@ -151,8 +151,8 @@ case "$choice" in
     docker stop elixir
     docker kill elixir
     docker rm elixir
-    docker pull elixirprotocol/validator:v3
-    echo -e "${GREEN}엘릭서 노드 업데이트가 완료되었습니다.${NC}"
+    echo -e "${GREEN}1.이제 컨트롤+AD로 스크립트를 분리하신 후 다시 sreen -S elixir로 스크린을 새로 생성하세요.${NC}"
+    echo -e "${GREEN}2.스크립트를 다시 실행하신 후 1번을 눌러 새로 설치하세요.${NC}"
     echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${NC}"
     ;;
 
