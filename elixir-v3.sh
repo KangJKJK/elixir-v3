@@ -65,13 +65,18 @@ case "$choice" in
         echo -e "${GREEN}Docker가 이미 설치되어 있습니다.${NC}"
     fi
 
-        # validator_wallet.txt 파일 존재 여부 확인
-        if [[ -f validator_wallet.txt ]]; then
-            echo -e "${RED}validator_wallet.txt 파일이 이미 존재합니다. 파일을 삭제합니다.${NC}"
-            rm validator_wallet.txt  # 기존 파일 삭제
-        fi
+    # validator_wallet.txt 파일 존재 여부 확인
+    if [[ -f validator_wallet.txt ]]; then
+        echo -e "${RED}validator_wallet.txt 파일이 이미 존재합니다. 파일을 삭제합니다.${NC}"
+        rm validator_wallet.txt  # 기존 파일 삭제
+    else
+        # validator_wallet.txt 파일이 존재할 경우, 개인 키 및 주소를 읽어옴
+        PRIVATE_KEY=$(grep "Private Key:" validator_wallet.txt | awk -F': ' '{print $2}' | sed 's/^0x//')
+        VALIDATOR_ADDRESS=$(grep "Address:" validator_wallet.txt | awk -F': ' '{print $2}')
+    fi
 
-        # 새로운 validator_wallet.txt 파일 생성
+    # 새로운 validator_wallet.txt 파일 생성
+    if [[ ! -f validator_wallet.txt ]]; then
         echo -e "${RED}validator_wallet.txt 파일이 존재하지 않습니다. 파일을 생성합니다.${NC}"
         
         # 검증자 지갑의 프라이빗 키와 주소를 입력받아 validator_wallet.txt 파일 생성
@@ -81,10 +86,6 @@ case "$choice" in
         # validator_wallet.txt 파일에 정보 저장
         echo "Private Key: $PRIVATE_KEY" > validator_wallet.txt
         echo "Address: $VALIDATOR_ADDRESS" >> validator_wallet.txt
-    else
-        # validator_wallet.txt 파일이 존재할 경우, 개인 키 및 주소를 읽어옴
-        PRIVATE_KEY=$(grep "Private Key:" validator_wallet.txt | awk -F': ' '{print $2}' | sed 's/^0x//')
-        VALIDATOR_ADDRESS=$(grep "Address:" validator_wallet.txt | awk -F': ' '{print $2}')
     fi
 
     ENV_FILE="validator.env"
