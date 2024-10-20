@@ -148,6 +148,7 @@ case "$choice" in
 
     2)
     echo -e "${GREEN}엘릭서 노드 업데이트를 시작합니다.${NC}"
+    docker stop elixir
     docker kill elixir
     docker rm elixir
     docker pull elixirprotocol/validator:v3
