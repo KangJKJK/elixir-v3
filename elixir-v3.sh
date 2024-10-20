@@ -13,7 +13,8 @@ echo -e "${BOLD}${YELLOW}1. 엘릭서 노드 새로 설치${NC}"
 echo -e "${BOLD}${YELLOW}2. 엘릭서 노드 업데이트${NC}"
 read -p "선택 (1 또는 2): " choice
 
-if [[ "$choice" == "1" ]]; then
+case "$choice" in
+    1)
     echo -e "${GREEN}Elixir-v3 노드 설치를 시작합니다.${NC}"
 
     command_exists() {
@@ -142,15 +143,19 @@ if [[ "$choice" == "1" ]]; then
 
     echo -e "${GREEN}모든 작업이 완료되었습니다. 컨트롤+A+D로 스크린을 종료해주세요.${NC}"
     echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${NC}"
+    ;;
 
-elif [[ "$choice" == "2" ]]; then
+    2)
     echo -e "${GREEN}엘릭서 노드 업데이트를 시작합니다.${NC}"
     docker kill elixir
     docker rm elixir
     docker pull elixirprotocol/validator:v3
     echo -e "${GREEN}엘릭서 노드 업데이트가 완료되었습니다.${NC}"
     echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${NC}"
-else
+    ;;
+
+    *)
     echo -e "${RED}잘못된 선택입니다. 스크립트를 종료합니다.${NC}"
     exit 1
-fi
+    ;;
+esac
