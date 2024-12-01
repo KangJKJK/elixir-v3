@@ -65,19 +65,23 @@ case "$choice" in
         echo -e "${GREEN}Docker가 이미 설치되어 있습니다.${NC}"
     fi
 
-    # validator_wallet.txt 파일 존재 여부 확인
+   # validator_wallet.txt 파일 존재 여부 및 내용 확인
+    VALID_FILE=false
     if [[ -f validator_wallet.txt ]]; then
-        echo -e "${RED}validator_wallet.txt 파일이 이미 존재합니다. 파일을 삭제합니다.${NC}"
-        rm validator_wallet.txt  # 기존 파일 삭제
-    else
-        # validator_wallet.txt 파일이 존재할 경우, 개인 키 및 주소를 읽어옴
+        # 파일이 존재할 경우, 개인 키 및 주소를 읽어옴
         PRIVATE_KEY=$(grep "Private Key:" validator_wallet.txt | awk -F': ' '{print $2}' | sed 's/^0x//')
         VALIDATOR_ADDRESS=$(grep "Address:" validator_wallet.txt | awk -F': ' '{print $2}')
+        
+        # 파일 내용이 유효한지 확인
+        if [[ ! -z "$PRIVATE_KEY" && ! -z "$VALIDATOR_ADDRESS" ]]; then
+            VALID_FILE=true
+            echo -e "${GREEN}기존 validator_wallet.txt 파일에서 정보를 불러왔습니다.${NC}"
+        fi
     fi
 
-    # 새로운 validator_wallet.txt 파일 생성
-    if [[ ! -f validator_wallet.txt ]]; then
-        echo -e "${RED}validator_wallet.txt 파일이 존재하지 않습니다. 파일을 생성합니다.${NC}"
+    # 파일이 없거나 유효하지 않은 경우 새로 생성
+    if [[ "$VALID_FILE" = false ]]; then
+        echo -e "${RED}유효한 validator_wallet.txt 파일이 없습니다. 새로 생성합니다.${NC}"
         
         # 검증자 지갑의 프라이빗 키와 주소를 입력받아 validator_wallet.txt 파일 생성
         read -p "검증자 지갑의 프라이빗 키를 입력하세요(0x포함): " PRIVATE_KEY
