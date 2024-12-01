@@ -125,7 +125,7 @@ case "$choice" in
     read -p "위 단계를 완료하셨나요? (y/n): " response
     if [[ "$response" =~ ^[yY]$ ]]; then
         echo -e "${BOLD}${CYAN}Elixir Protocol Validator 이미지 생성 중...${NC}"
-        docker pull elixirprotocol/validator:v3
+        docker pull elixirprotocol/validator:testnet
     else
         echo -e "${RED}작업이 완료되지 않았습니다. 스크립트를 종료합니다.${NC}"
         exit 1
