@@ -80,7 +80,7 @@ case "$choice" in
         echo -e "${RED}validator_wallet.txt 파일이 존재하지 않습니다. 파일을 생성합니다.${NC}"
         
         # 검증자 지갑의 프라이빗 키와 주소를 입력받아 validator_wallet.txt 파일 생성
-        read -p "검증자 지갑의 프라이빗 키를 입력하세요: " PRIVATE_KEY
+        read -p "검증자 지갑의 프라이빗 키를 입력하세요(0x포함): " PRIVATE_KEY
         read -p "검증자 지갑 주소를 입력하세요: " VALIDATOR_ADDRESS
 
         # validator_wallet.txt 파일에 정보 저장
