@@ -139,7 +139,7 @@ case "$choice" in
     echo -e "${GREEN}모든 사용 중인 포트가 허용되었습니다.${NC}"
 
     echo -e "${BOLD}${CYAN}Docker 실행 중...${NC}"
-    docker run -d --env-file validator.env --name elixir -p 17690:17690 --restart unless-stopped elixirprotocol/validator:v3
+    docker run -d --env-file validator.env --name elixir -p 17690:17690 --restart unless-stopped elixirprotocol/validator:testnet
     echo ""
 
     # 현재 사용 중인 포트 확인 및 허용
@@ -168,6 +168,7 @@ case "$choice" in
     docker stop elixir
     docker kill elixir
     docker rm elixir
+    docker pull elixirprotocol/validator:testnet
     echo -e "${GREEN}1.이제 컨트롤+AD로 스크립트를 분리하신 후 다시 sreen -S elixir로 스크린을 새로 생성하세요.${NC}"
     echo -e "${GREEN}2.스크립트를 다시 실행하신 후 1번을 눌러 새로 설치하세요.${NC}"
     echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${NC}"
