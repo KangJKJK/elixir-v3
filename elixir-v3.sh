@@ -9,8 +9,9 @@ CYAN='\033[36m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}Elixir-v3 노드 설치 또는 업데이트를 선택하세요.${NC}"
-echo -e "${BOLD}${YELLOW}1. 엘릭서 노드 새로 설치${NC}"
-echo -e "${BOLD}${YELLOW}3. 엘릭서 메인넷 노드 삭제${NC}"
+echo -e "${BOLD}${YELLOW}1. 엘릭서 테스트넷 노드 새로 설치${NC}"
+echo -e "${BOLD}${YELLOW}2. 엘릭서 테스트넷 노드 업데이트${NC}"
+echo -e "${BOLD}${YELLOW}3. 엘릭서 테스트넷 노드 삭제${NC}"
 read -p "선택 (1, 2 또는 3): " choice
 
 case "$choice" in
