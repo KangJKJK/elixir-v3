@@ -142,6 +142,23 @@ case "$choice" in
     docker run -d --env-file validator.env --name elixir -p 17690:17690 --restart unless-stopped elixirprotocol/validator:v3
     echo ""
 
+    # 현재 사용 중인 포트 확인 및 허용
+    echo -e "${GREEN}현재 사용 중인 포트를 확인합니다...${NC}"
+    
+    # TCP 포트 확인 및 허용
+    echo -e "${YELLOW}TCP 포트 확인 및 허용 중...${NC}"
+    sudo ss -tlpn | grep LISTEN | awk '{print $4}' | cut -d':' -f2 | while read port; do
+        echo -e "TCP 포트 ${GREEN}$port${NC} 허용"
+        sudo ufw allow $port/tcp
+    done
+    
+    # UDP 포트 확인 및 허용
+    echo -e "${YELLOW}UDP 포트 확인 및 허용 중...${NC}"
+    sudo ss -ulpn | grep LISTEN | awk '{print $4}' | cut -d':' -f2 | while read port; do
+        echo -e "UDP 포트 ${GREEN}$port${NC} 허용"
+        sudo ufw allow $port/udp
+    done
+
     echo -e "${GREEN}모든 작업이 완료되었습니다. 컨트롤+A+D로 스크린을 종료해주세요.${NC}"
     echo -e "${GREEN}스크립트 작성자: https://t.me/kjkresearch${NC}"
     ;;
