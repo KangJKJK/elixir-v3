@@ -146,18 +146,8 @@ case "$choice" in
     cat $ENV_FILE
     echo ""
 
-    if [[ "$response" =~ ^[yY]$ ]]; then
-        echo -e "${BOLD}${CYAN}Elixir Protocol Validator 이미지 생성 중...${NC}"
-        docker pull elixirprotocol/validator
-    else
-        echo -e "${RED}작업이 완료되지 않았습니다. 스크립트를 종료합니다.${NC}"
-        exit 1
-    fi
-
-    echo ""
-    echo -e "${BOLD}${CYAN}${ENV_FILE} 파일이 다음 내용으로 생성되었습니다:${NC}"
-    cat $ENV_FILE
-    echo ""
+    echo -e "${BOLD}${CYAN}Elixir Protocol Validator 이미지 생성 중...${NC}"
+    docker pull elixirprotocol/validator
 
     echo -e "${BOLD}${YELLOW}1. 해당 주소로 이동하세요: https://testnet-3.elixir.xyz/${NC}"
     echo -e "${BOLD}${YELLOW}2. Sepolia Ethereum이 있는 지갑을 연결하세요 (이 지갑은 검증자 지갑 주소가 아니어야 합니다).${NC}"
