@@ -146,9 +146,6 @@ case "$choice" in
     cat $ENV_FILE
     echo ""
 
-    echo -e "${BOLD}${CYAN}Elixir Protocol Validator 이미지 생성 중...${NC}"
-    docker pull elixirprotocol/validator
-
     echo -e "${BOLD}${YELLOW}1. 해당 주소로 이동하세요: https://testnet-3.elixir.xyz/${NC}"
     echo -e "${BOLD}${YELLOW}2. Sepolia Ethereum이 있는 지갑을 연결하세요 (이 지갑은 검증자 지갑 주소가 아니어야 합니다).${NC}"
     echo -e "${BOLD}${YELLOW}3. Sepolia에서 MOCK Elixir 토큰을 발행하세요${NC}"
@@ -157,6 +154,7 @@ case "$choice" in
     echo ""
 
     read -p "위 단계를 완료하셨나요? (y/n): " response
+    
     if [[ "$response" =~ ^[yY]$ ]]; then
         echo -e "${BOLD}${CYAN}Elixir Protocol Validator 이미지 생성 중...${NC}"
         docker pull elixirprotocol/validator:testnet
